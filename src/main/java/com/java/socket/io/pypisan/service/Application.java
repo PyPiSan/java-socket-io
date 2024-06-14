@@ -1,4 +1,4 @@
-package com.java.socket.io.pypisan;
+package com.java.socket.io.pypisan.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
