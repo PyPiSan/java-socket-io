@@ -1,27 +1,52 @@
 package com.java.socket.io.pypisan.models;
-import java.time.LocalDateTime;
-import java.util.Objects;
 
-public class SignupModel {
-    
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.util.Objects;
+import java.util.UUID;
+
+
+@Entity
+@Table(name = "users")
+public class User {
+
+    @Id
+    @Column(name="user_id")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
     private String userName;
-    private String password;
     private LocalDateTime joinedOn;
     private LocalDateTime updatedAt;
     private String emailId;
     private String profileUrl;
-    
 
-    public SignupModel() {
+
+
+    public User() {
     }
 
-    public SignupModel(String userName, String password, LocalDateTime joinedOn, LocalDateTime updatedAt, String emailId, String profileUrl) {
+    public User(UUID id, String userName, LocalDateTime joinedOn, LocalDateTime updatedAt, String emailId, String profileUrl) {
+        this.id = id;
         this.userName = userName;
-        this.password = password;
         this.joinedOn = joinedOn;
         this.updatedAt = updatedAt;
         this.emailId = emailId;
         this.profileUrl = profileUrl;
+    }
+
+    public UUID getId() {
+        return this.id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -30,14 +55,6 @@ public class SignupModel {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public LocalDateTime getJoinedOn() {
@@ -72,32 +89,27 @@ public class SignupModel {
         this.profileUrl = profileUrl;
     }
 
-    public SignupModel userName(String userName) {
+    public User userName(String userName) {
         setUserName(userName);
         return this;
     }
 
-    public SignupModel password(String password) {
-        setPassword(password);
-        return this;
-    }
-
-    public SignupModel joinedOn(LocalDateTime joinedOn) {
+    public User joinedOn(LocalDateTime joinedOn) {
         setJoinedOn(joinedOn);
         return this;
     }
 
-    public SignupModel updatedAt(LocalDateTime updatedAt) {
+    public User updatedAt(LocalDateTime updatedAt) {
         setUpdatedAt(updatedAt);
         return this;
     }
 
-    public SignupModel emailId(String emailId) {
+    public User emailId(String emailId) {
         setEmailId(emailId);
         return this;
     }
 
-    public SignupModel profileUrl(String profileUrl) {
+    public User profileUrl(String profileUrl) {
         setProfileUrl(profileUrl);
         return this;
     }
@@ -106,28 +118,29 @@ public class SignupModel {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof SignupModel)) {
+        if (!(o instanceof User)) {
             return false;
         }
-        SignupModel signupModel = (SignupModel) o;
-        return Objects.equals(userName, signupModel.userName) && Objects.equals(password, signupModel.password) && Objects.equals(joinedOn, signupModel.joinedOn) && Objects.equals(updatedAt, signupModel.updatedAt) && Objects.equals(emailId, signupModel.emailId) && Objects.equals(profileUrl, signupModel.profileUrl);
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(userName, user.userName) && Objects.equals(joinedOn, user.joinedOn) && Objects.equals(updatedAt, user.updatedAt) && Objects.equals(emailId, user.emailId) && Objects.equals(profileUrl, user.profileUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, password, joinedOn, updatedAt, emailId, profileUrl);
+        return Objects.hash(id, userName, joinedOn, updatedAt, emailId, profileUrl);
     }
 
     @Override
     public String toString() {
         return "{" +
-            " userName='" + getUserName() + "'" +
-            ", password='" + getPassword() + "'" +
+            " id='" + getId() + "'" +
+            ", userName='" + getUserName() + "'" +
             ", joinedOn='" + getJoinedOn() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +
             ", emailId='" + getEmailId() + "'" +
             ", profileUrl='" + getProfileUrl() + "'" +
             "}";
     }
-
+    
+    
 }
