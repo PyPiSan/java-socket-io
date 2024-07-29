@@ -2,8 +2,6 @@ package com.java.socket.io.pypisan.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-// import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -11,7 +9,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import lombok.extern.log4j.Log4j2;
+// import lombok.extern.log4j.Log4j2;
 
 import java.util.Properties;
 
@@ -19,7 +17,7 @@ import javax.sql.DataSource;
 
 @CrossOrigin
 @Component
-@Log4j2
+// @Log4j2
 public class JpaConfig {
 
 
@@ -35,7 +33,7 @@ public class JpaConfig {
     @Value("${jpa.properties.hibernate.dialect}")
     public String dialect;
 
-    @Value("${jpa.hibernate.ddl-auto}")
+    @Value("${hibernate.hbm2ddl.auto}")
     public String ddl;
 
     @Value("${datasource.driver-class-name}")
@@ -60,9 +58,9 @@ public class JpaConfig {
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties jpaProperties = new Properties();
-        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"); // Change dialect based on your database
+        jpaProperties.put("hibernate.dialect", dialect); // Change dialect based on your database
         jpaProperties.put("hibernate.show_sql", "true");
-        jpaProperties.put("hibernate.hbm2ddl.auto", "update"); // Use "validate" or "none" in production
+        jpaProperties.put("hibernate.hbm2ddl.auto", ddl); // Use "validate" or "none" in production
 
         emf.setJpaProperties(jpaProperties);
         return emf;

@@ -5,13 +5,13 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.java.socket.io.pypisan.enums.MessageType;
 import com.java.socket.io.pypisan.models.Message;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+// import lombok.extern.log4j.Log4j2;
 
 
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
+// @Log4j2
 public class SocketService {
 
     private final MessageService messageService;
