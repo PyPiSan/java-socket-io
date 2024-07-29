@@ -57,7 +57,7 @@ public class SignupController {
             newUser.setPassword(pass);
             userService.saveUser(newUser);
             response.setStatus(Constant.success);
-            response.setMessage("use the password for login "+pass);
+            response.setMessage("use the password for login " +pass);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     

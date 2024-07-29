@@ -11,6 +11,8 @@ public class Constant {
     public static final String emailRequired = "email id required";
     public static final String profileUrlRequired = "profile url required";
     public static final String userExists = "this email is already registered";
+    public static final String WELCOME_MESSAGE = "connection created successfuuly";
+    public static final String DISCONNECT_MESSAGE = "thanks for using";
 
     public static String encryptpassword(String password) {
         String encryptedpassword = null;

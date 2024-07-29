@@ -56,7 +56,7 @@ public class JpaConfig {
         Properties jpaProperties = new Properties();
         jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"); // Change dialect based on your database
         jpaProperties.put("hibernate.show_sql", "true");
-        jpaProperties.put("hibernate.hbm2ddl.auto", "create-drop"); // Use "validate" or "none" in production
+        jpaProperties.put("hibernate.hbm2ddl.auto", "update"); // Use "validate" or "none" in production
 
         emf.setJpaProperties(jpaProperties);
         return emf;
