@@ -21,24 +21,36 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(name="user_name")
     private String userName;
+
+    @Column(name="joined_on")
     private LocalDateTime joinedOn;
+
+    @Column(name="updated_on")
     private LocalDateTime updatedAt;
+
+    @Column(name="email")
     private String emailId;
+
+    @Column(name="profile_url")
     private String profileUrl;
 
+    @Column(name="key")
+    private String password;
 
 
     public User() {
     }
 
-    public User(UUID id, String userName, LocalDateTime joinedOn, LocalDateTime updatedAt, String emailId, String profileUrl) {
+    public User(UUID id, String userName, LocalDateTime joinedOn, LocalDateTime updatedAt, String emailId, String profileUrl, String password) {
         this.id = id;
         this.userName = userName;
         this.joinedOn = joinedOn;
         this.updatedAt = updatedAt;
         this.emailId = emailId;
         this.profileUrl = profileUrl;
+        this.password = password;
     }
 
     public UUID getId() {
@@ -114,20 +126,17 @@ public class User {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof User)) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(userName, user.userName) && Objects.equals(joinedOn, user.joinedOn) && Objects.equals(updatedAt, user.updatedAt) && Objects.equals(emailId, user.emailId) && Objects.equals(profileUrl, user.profileUrl);
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, joinedOn, updatedAt, emailId, profileUrl);
+        return Objects.hash(id, userName, joinedOn, updatedAt, emailId, profileUrl, password);
     }
 
     @Override
@@ -139,6 +148,7 @@ public class User {
             ", updatedAt='" + getUpdatedAt() + "'" +
             ", emailId='" + getEmailId() + "'" +
             ", profileUrl='" + getProfileUrl() + "'" +
+            ", password='" + getPassword() + "'" +
             "}";
     }
     

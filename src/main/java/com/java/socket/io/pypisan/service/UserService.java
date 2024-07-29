@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.java.socket.io.pypisan.constants.Constant;
 import com.java.socket.io.pypisan.models.User;
 import com.java.socket.io.pypisan.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,11 +32,21 @@ public class UserService {
 
 
     public User getUserById(UUID id){
-        Optional<User> optionalEmployee = userRepository.findById(id);
-        if(optionalEmployee.isPresent()){
-            return optionalEmployee.get();
+        Optional<User> optionalUser = userRepository.findById(id);
+        if(optionalUser.isPresent()){
+            return optionalUser.get();
         }
-        log.info("Employee with id: {} doesn't exist", id);
+        log.info("User with id: {} doesn't exist", id);
+        return null;
+    }
+
+    public User getUserByEmail(String email){
+        log.info("find user with email: {}", email);
+        User user = userRepository.findByEmail(email);
+        if(user != null){
+            return user;
+        }
+        log.info("User with email: {} doesn't exist", email);
         return null;
     }
 
@@ -43,9 +55,11 @@ public class UserService {
 
         user.joinedOn(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
+        String hashKey = Constant.encryptpassword(user.getUserName()+user.getPassword());
+        user.setPassword(hashKey);
         User saveduser = userRepository.save(user);
 
-        log.info("Employee with id: {} saved successfully", saveduser.getId());
+        log.info("User with user_id: {} saved successfully", saveduser.getId());
         return saveduser;
     }
 
