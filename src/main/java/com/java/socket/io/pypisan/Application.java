@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("com.java.socket.io.pypisan.repository")
+@ComponentScan(basePackages = {"com.java.socket.io.pypisan"})
 public class Application {
 
 	public static void main(String[] args) {
