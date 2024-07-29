@@ -1,6 +1,6 @@
 package com.java.socket.io.pypisan.configuration;
 
-// import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 // import org.springframework.context.annotation.PropertySource;
@@ -8,41 +8,47 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+import lombok.extern.log4j.Log4j2;
+
 import java.util.Properties;
 
 import javax.sql.DataSource;
 
-@Configuration
-// @PropertySource(value = { "classpath:application.properties" })
+@CrossOrigin
+@Component
+@Log4j2
 public class JpaConfig {
 
 
-    // @Value("${spring.datasource.url}")
-    // public String url;
+    @Value("${datasource.url}")
+    public String url;
 
-    // @Value("${spring.datasource.username}")
-    // public String username;
+    @Value("${datasource.username}")
+    public String username;
 
-    // @Value("${spring.datasource.password}")
-    // public String password;
+    @Value("${datasource.password}")
+    public String password;
 
-    // @Value("${spring.jpa.properties.hibernate.dialect}")
-    // public String dialect;
+    @Value("${jpa.properties.hibernate.dialect}")
+    public String dialect;
 
-    // @Value("${spring.jpa.hibernate.ddl-auto}")
-    // public String ddl;
+    @Value("${jpa.hibernate.ddl-auto}")
+    public String ddl;
 
-    // @Value("${spring.datasource.driver-class-name}")
-    // public String driver;
+    @Value("${datasource.driver-class-name}")
+    public String driver;
 
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         // System.out.println(url);
-        dataSource.setDriverClassName("org.postgresql.Driver"); // Change based on your database
-        dataSource.setUrl("jdbc:postgresql://localhost:5400/test");
-        dataSource.setUsername("user");
-        dataSource.setPassword("password");
+        dataSource.setDriverClassName(driver); // Change based on your database
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
         return dataSource;
     }
 
