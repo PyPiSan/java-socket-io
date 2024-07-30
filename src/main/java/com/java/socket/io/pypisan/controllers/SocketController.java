@@ -7,7 +7,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.corundumstudio.socketio.listener.DisconnectListener;
-// import com.java.socket.io.pypisan.constants.Constant;
+import com.java.socket.io.pypisan.constants.Constant;
 import com.java.socket.io.pypisan.models.Message;
 import com.java.socket.io.pypisan.service.SocketService;
 
@@ -56,11 +56,13 @@ public class SocketController {
         public void onConnect(SocketIOClient client) {
             log.info("Perform operation on user connect in controller");
             var params = client.getHandshakeData().getUrlParams();
-            String room = params.get("room").stream().collect(Collectors.joining());
-            String username = params.get("username").stream().collect(Collectors.joining());
-            client.joinRoom(room);
+            // String room = params.get("room").stream().collect(Collectors.joining());
+            // String username = params.get("username").stream().collect(Collectors.joining());
+            // client.joinRoom(room);
+            // socketServer.sendSocketmessage(client, )
             // socketService.saveInfoMessage(client, String.format(Constant.WELCOME_MESSAGE, username), room);
-            log.info("Socket ID[{}] - room[{}] - username [{}]  Connected to chat module through", client.getSessionId().toString(), room, username);
+            client.sendEvent("message",Constant.WELCOME_MESSAGE);
+            log.info("Socket ID[{}]--paramas[{}]  Connected to chat module through", client.getRemoteAddress(), params)    ;
         }
     };
 
@@ -70,10 +72,11 @@ public class SocketController {
         public void onDisconnect(SocketIOClient client) {
             log.info("Perform operation on user disconnect in controller");
             var params = client.getHandshakeData().getUrlParams();
-            String room = params.get("room").stream().collect(Collectors.joining());
-            String username = params.get("username").stream().collect(Collectors.joining());
+            // String room = params.get("room").stream().collect(Collectors.joining());
+            // String username = params.get("username").stream().collect(Collectors.joining());
             // socketService.saveInfoMessage(client, String.format(Constant.DISCONNECT_MESSAGE, username), room);
-            log.info("Socket ID[{}] - room[{}] - username [{}]  discnnected to chat module through", client.getSessionId().toString(), room, username);
+            client.sendEvent("message",Constant.DISCONNECT_MESSAGE);
+            log.info("Socket ID[{}] - params[{}]  discnnected to chat module through", client.getSessionId().toString(), params);
         }
     };
     

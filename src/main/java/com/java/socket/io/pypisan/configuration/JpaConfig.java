@@ -30,8 +30,8 @@ public class JpaConfig {
     @Value("${datasource.password}")
     public String password;
 
-    @Value("${jpa.properties.hibernate.dialect}")
-    public String dialect;
+    // @Value("${jpa.properties.hibernate.dialect}")
+    // public String dialect;
 
     @Value("${hibernate.hbm2ddl.auto}")
     public String ddl;
@@ -58,7 +58,7 @@ public class JpaConfig {
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties jpaProperties = new Properties();
-        jpaProperties.put("hibernate.dialect", dialect); // Change dialect based on your database
+        // jpaProperties.put("hibernate.dialect", dialect); // Change dialect based on your database
         jpaProperties.put("hibernate.show_sql", "true");
         jpaProperties.put("hibernate.hbm2ddl.auto", ddl); // Use "validate" or "none" in production
 
